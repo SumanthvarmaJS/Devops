@@ -2,9 +2,9 @@ pipeline {
     agent any
     
     stages {
-        stage('Clone Repo') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/SumanthvarmaJS/Devops.git'
+                git branch: 'main', url: 'https://github.com/SumanthvarmaJS/Devops.git'
             }
         }
         
