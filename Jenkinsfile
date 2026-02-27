@@ -1,12 +1,8 @@
 pipeline {
     agent any
     
-    environment {
-        DOCKER_IMAGE = "sumanthvarma002/my-python-app"
-    }
-
     stages {
-        
+
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/SumanthvarmaJS/Devops.git'
@@ -15,19 +11,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t sumanthvarma002/my-python-app .'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                sh 'docker login -u sumanthvarma002 -p Sumanth123'
             }
         }
 
         stage('Push Image to DockerHub') {
             steps {
-                sh 'docker push $DOCKER_IMAGE'
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                sh 'docker run --rm $DOCKER_IMAGE'
+                sh 'docker push sumanthvarma002/my-python-app'
             }
         }
 
